@@ -1,0 +1,99 @@
+﻿
+<div class="ext-hubs-browse-container" data-bind="if:table">
+
+    <div class="ext-hubs-browse-section siportalfx-hideonactivated">
+        <div data-bind="text: countMessage" class="ext-hubs-browse-count"></div>
+    </div>
+    <div data-bind="sanitizedCss: { 'ext-hubs-browse-grid-parent': !isEmptyGrid, 'ext-hubs-browse-hidegrid': isEmptyGrid },style:{height:tableHeight}" class="ext-hubs-browse-grid-parent" >
+        <div class="ext-hubs-browse-grid fxc-base si-grid-focus fxc-grid-sorting fxc-grid-scrolling fxc-grid-resizing si-grid-selection fxc-grid-contextMenu fxc-grid-grouping fxc-grid2 azc-control fxc-grid-verticalScroll" data-formelement="pcControl: gridViewModel" role="grid" aria-label="List of resource groups" aria-colcount="3" aria-rowcount="22" >
+
+            <div class="fxc-grid-container azc-br-muted" data-bind="css: { 'fxc-grid-loading' : table.loading } ">
+                <div class="fxc-grid-tableContainer azc-br-muted" style="padding-top: 42px;">
+                    <div class="fxc-grid-tableScrollContainer azc-br-muted" data-bind="if: table.columns().length, attr: { tabindex: table.isFireFox ? -1 : null }">
+                        <table role="presentation" data-bind="attr:{'data-grid-activation':selection.activation,'class':'fxc-grid-tableHeader'+' '+(ko.unwrap(selection.multiselect)?'si-grid-multiselection':'')}" data-grid-activation="true" class="fxc-grid-tableHeader si-grid-multiselection" style="width: calc(100% - 16px);">
+
+
+                            <colgroup>
+                                <col class="si-grid-selection-cell-col azc-collapsed-hidden" data-bind="css: { 'azc-collapsed-hidden': selection.hiddenInCollapsed }">
+                                <!-- ko template: { foreach: table.columns } -->
+                                <col data-bind="attr: { 'class': 'col' + $index() }, style: { width: width }, css: { 'azc-collapsed-hidden': hiddenInCollapsed }">
+                                <!-- /ko -->
+                                <col class="fxc-grid-contextMenuShortcut-col" data-bind="style:{ width: table.contextMenu.width } ">
+                            </colgroup>
+
+                            <thead>
+                                <tr role="row">
+
+
+                                    <th role="presentation" class="si-grid-selection-cell-header azc-collapsed-hidden" data-bind="css: { &quot;azc-collapsed-hidden&quot;: selection.hiddenInCollapsed }" aria-hidden="true">
+
+                                    </th>
+
+                                    <!-- ko template: { foreach: table.columns } -->
+                                    <th role="presentation" data-bind="'style':{ width:width},'attr':{'class':ko.unwrap('fxc-grid-sorting-header')+' '+ko.unwrap('fxc-grid-column-header'+' '+(ko.unwrap(hiddenInCollapsed)?'azc-collapsed-hidden':''))}" class="fxc-grid-sorting-header fxc-grid-column-header " style="width: 49.096%;">
+                                        <div class="fxc-grid-header-wrapper">
+
+                                            <a role="columnheader" data-bind="attr:{ class: $grid.table.sorting.getSortClasses(sortable, sortOrder()), 'aria-sort': sortable && $grid.table.sorting.getAriaSort(sortOrder()), tabindex: sortable ? 0 : null, id: columnId }" class="fxc-sortable fxc-none" aria-sort="none" tabindex="0" id="fxgrid2col1"><span class="fxc-grid-headerlabel" data-bind="text: name">Name</span><span class="fxc-grid-sorting-sortImage si-portal-svg" data-bind="visible: sortable"><svg viewBox="0 0 34.761 26.892" focusable="false" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" class=" si-portal-svg" role="presentation" aria-hidden="true"><g><path class="siportalfx-svg-c07 siportalfx-ascend" d="M15.359 9.478l-6.226-6.21v17.557H7.426V3.268L1.2 9.478 0 8.281 8.279 0l8.279 8.281z"></path><path class="siportalfx-svg-c07 siportalfx-descend" d="M34.761 18.612l-8.279 8.281-8.282-8.281 1.2-1.2 6.226 6.21V6.068h1.707v17.557l6.226-6.21z"></path></g></svg></span></a>
+                                            <div class="fxc-grid-resizableColumn-handle">
+                                                <div class="fxc-grid-resizableColumn-handle-line azc-bg-muted"></div>
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                    <!-- /ko -->
+                                    <th aria-hidden="true" class="fxc-grid-contextMenuShortcut-header"></th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <div class="fxc-grid-tableContent" style=" position: relative; ">
+                            <table role="presentation" data-bind="'attr':{'data-grid-activation':selection.activation,'class':'fxc-grid-full'+' '+(ko.unwrap(selection.multiselect)?'si-grid-multiselection':'')}" data-grid-activation="true" class="fxc-grid-full si-grid-multiselection" style="position: absolute;">
+
+                                <colgroup>
+                                    <col class="si-grid-selection-cell-col azc-collapsed-hidden" data-bind="css: { 'azc-collapsed-hidden': selection.hiddenInCollapsed }">
+                                    <!-- ko template: {  foreach: table.columns } -->
+                                    <col data-bind="attr: { 'class': 'col' + $index() }, style: { width: width }, css: { 'azc-collapsed-hidden': hiddenInCollapsed }">
+                                    <!-- /ko -->
+                                    <col class="fxc-grid-contextMenuShortcut-col" data-bind="style:{ width: table.contextMenu.width } ">
+                                </colgroup>
+
+
+                                <tbody role="rowgroup" data-bind="template:{ foreach:table.rows},'attr':{'class':'fxc-grid-groupdata'+' '+(ko.unwrap(table.grouping.groupBy && !!table.grouping.groupBy())?'fxc-grid-grouped':'')}" class="fxc-grid-groupdata ">
+                                    <tr role="row" data-bind="'attr':attr,'css':css,'hasfocus':isFocused, asyncClick:rowClicked" tabindex="0" class="fxc-grid-row si-portal-focus si-portal-hover" aria-label="Row representing the resource group named ammo-04-sep-2017 ">
+
+
+                                        <td role="presentation" class="si-grid-selection-cell azc-br-muted azc-collapsed-hidden" data-bind="css: { 'azc-collapsed-hidden': $grid.selection.hiddenInCollapsed }" aria-hidden="true">
+                                            <div class="si-grid-selection-cell-wrapper si-portal-border azc-fill-text">
+                                                <div class="si-grid-selection-cell-check"></div>
+                                            </div>
+                                        </td>
+                                        <!-- ko template: {  foreach: $data.cells } -->
+                                        <td role="gridcell" data-bind="css: column.css, attr: attr, koLayout:$data" class="fxc-grid-cell azc-br-muted" aria-describedby="fxgrid2col1" aria-colindex="1"></td>
+                                        <!-- /ko -->
+                                        <td role="gridcell" class="fxc-grid-contextMenuShortcut-cell azc-br-muted">
+                                            <a class="siportalfx-inherit-color si-portal-svg" href="" role="button" data-bind="visible: table.contextMenu.shortcutsVisible " title="Click to open context menu" tabindex="0"><svg height="100%" width="100%" aria-hidden="true" role="presentation" focusable="false"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#FxSymbol0-0e3"></use></svg></a>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="fxc-grid-loadingUx si-portal-svg" data-bind="visible: table._loading" style="display: none;">
+                            <span style="height: 32px; width: 32px; opacity: 0.7"><svg viewBox="0 0 16 16" focusable="false" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" class=" si-portal-svg" role="presentation" aria-hidden="true"><g><g class="siportalfx-svg-loading-animated"><rect class="siportalfx-svg-loading-square siportalfx-svg-c07" height="4" width="4" y="6"></rect><rect class="siportalfx-svg-loading-square siportalfx-svg-c07" height="4" width="4" x="6" y="6"></rect><rect class="siportalfx-svg-loading-square siportalfx-svg-c07" height="4" width="4" x="12" y="6"></rect></g></g></svg></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="azc-resize azc-resize-shrink">
+                <div class="azc-resize-content" style="width: 200%; min-width: 1px; height: 200%; min-height: 1px;"></div>
+            </div>
+            <div class="azc-resize azc-resize-grow">
+                <div class="azc-resize-content" style="width: 1787px; height: 620px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

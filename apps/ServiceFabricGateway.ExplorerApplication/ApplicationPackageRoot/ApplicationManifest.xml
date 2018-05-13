@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceFabricGateway.ExplorerApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="S-Innovations.ServiceFabricGateway.Explorer_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="ASPNETCORE_ENVIRONMENT" DefaultValue="Staging" />
+    <Parameter Name="ExplorerServerName" DefaultValue="local.earthml.com" />
+    <Parameter Name="ResourceApiEndpoint" DefaultValue="https://earthml.com" />
+    <Parameter Name="OIDC_AUTHORITY" DefaultValue="https://local.earthml.com:8500/identity/" />
+    <Parameter Name="OIDC_SCOPE" DefaultValue="openid profile https://local.earthml.com:8500/identity https://local.earthml.com:8500/gateway" />
+    <Parameter Name="IDENTITY_SERVICE_THUMBPRINT" DefaultValue="C03BB5A6410741CDD2927B4FF88C3E67215A393B" />
+    <Parameter Name="InstrumentationKey" DefaultValue="00000000-0000-0000-0000-000000000000" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="S-Innovations.ServiceFabricGateway.ExplorerPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="Endpoints">
+            <Parameter Name="ResourceApiEndpoint" Value="[ResourceApiEndpoint]" />
+          </Section>
+          <Section Name="OidcClientConfiguration">
+            <Parameter Name="Authority" Value="[OIDC_AUTHORITY]" />
+            <Parameter Name="Scope" Value="[OIDC_SCOPE]" />
+          </Section>
+          <Section Name="ReverseProxySettings">
+            <Parameter Name="ServerName" Value="[ExplorerServerName]" />
+          </Section>
+          <Section Name="ApplicationInsights">
+            <Parameter Name="InstrumentationKey" Value="[InstrumentationKey]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[ASPNETCORE_ENVIRONMENT]" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ServiceFabricGateway.IdentityServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="IdentityService">
+            <Parameter Name="Thumbprint" Value="[IDENTITY_SERVICE_THUMBPRINT]" />
+            <Parameter Name="ServerName" Value="[ExplorerServerName]" />
+          </Section>
+          <Section Name="ApplicationInsights">
+            <Parameter Name="InstrumentationKey" Value="[InstrumentationKey]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[ASPNETCORE_ENVIRONMENT]" />
+    </EnvironmentOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="IdentityService" EntryPointType="All" />
+    </Policies>
+  </ServiceManifestImport>
+  <DefaultServices>
+    <Service Name="S-Innovations.ServiceFabricGateway.Explorer">
+      <StatelessService ServiceTypeName="S-Innovations.ServiceFabricGateway.ExplorerType" InstanceCount="[S-Innovations.ServiceFabricGateway.Explorer_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+  </DefaultServices>
+  <Principals>
+    <Users>
+      <User Name="IdentityService" AccountType="NetworkService" />
+    </Users>
+  </Principals>
+  <Policies>
+    <SecurityAccessPolicies>
+      <SecurityAccessPolicy ResourceRef="IdentityCert" PrincipalRef="IdentityService" ResourceType="Certificate" />
+    </SecurityAccessPolicies>
+  </Policies>
+  <Certificates>
+    <SecretsCertificate X509FindValue="[IDENTITY_SERVICE_THUMBPRINT]" Name="IdentityCert" />
+  </Certificates>
+</ApplicationManifest>

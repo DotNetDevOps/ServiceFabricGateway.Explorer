@@ -1,0 +1,404 @@
+﻿
+
+.layout-1-column.requester-tab-content {
+    overflow-y: scroll;
+}
+.requester-tab-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.requester-tab-content-panes {
+    flex: 1;
+}
+
+.requester-contents-group .requester-contents-group__section-top {
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #DBDBDB;
+}
+.request-editor__main {
+    position: relative;
+    box-sizing: border-box;
+    z-index: 7;
+    background-color: #FAFAFA;
+}
+.request-editor__main {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.request-editor__main .request-editor__main__url-group {
+    flex: 1;
+}
+
+
+.request-editor__main__url-group {
+    border-radius: 3px;
+    background-color: #F0F0F0;
+    margin-right: 10px;
+    border: 1px solid #DCDCDC;
+    height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+.request-method-editor {
+    flex: 0 0 115px;
+    color: #505050;
+    background-color: #F0F0F0;
+}
+.request-method-editor .dropdown {
+    width: 100%;
+    text-align: center;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+ 
+.btn {
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 40px;
+    padding: 0 10px 0 10px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    color: #fff;
+    cursor: default;
+ 
+    user-select: none;
+    cursor: pointer;
+}
+.request-method-editor .dropdown-button .btn {
+    font-weight: 600;
+    color: #808080;
+    font-size: 14px;
+    height: 38px;
+    width: 100%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropdown-caret {
+    display: block;
+    width: 13px;
+    height: 8px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiI…AgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==);
+    margin-left: 10px;
+}
+.requester-contents .is-hidden {
+    display: none;
+}
+.dropdown-menu.is-hidden {
+    display: none;
+}
+.dropdown-menu.fluid {
+    width: 100%;
+    min-width: inherit;
+}
+.is-hidden {
+    display: none;
+}
+.dropdown-menu {
+    min-width: 170px;
+}
+.dropdown-menu {
+    padding: 4px 0;
+    position: absolute;
+    top: 100%;
+    background-color: #F8F8F8;
+    min-width: 150px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+    margin-top: 3px;
+    z-index: 50;
+}
+.dropdown-menu .dropdown-menu-item {
+    padding: 0 15px;
+}
+ 
+.dropdown-menu-item {
+    position: relative;
+    box-sizing: border-box;
+    height: 30px;
+    padding: 0 12px;
+    color: #808080;
+    font-size: 12px;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    cursor: default;
+ 
+    user-select: none;
+    cursor: pointer;
+}
+.dropdown-menu-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.request-url-editor {
+    flex: 1;
+    color: #505050;
+    background-color: #F0F0F0;
+}
+.request-url-editor .auto-suggest {
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: #DCDCDC;
+}
+.auto-suggest {
+    position: relative;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    color: #505050;
+    flex: 1;
+    align-self: flex-start;
+}
+
+.request-url-editor .DraftEditor-root {
+    padding: 10px;
+}
+.auto-suggest .DraftEditor-root {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.DraftEditor-root {
+    position: relative;
+}
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+.auto-suggest .DraftEditor-editorContainer {
+    display: flex;
+    flex: 1;
+}
+.DraftEditor-editorContainer {
+    background-color: rgba(255,255,255,0);
+    border-left: .1px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+
+.request-url-editor .public-DraftEditor-content, .request-url-editor .public-DraftEditorPlaceholder-root {
+    font-size: 12px;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+.auto-suggest .public-DraftEditor-content {
+    display: flex;
+    flex: 1;
+    width: 0;
+    align-items: center;
+}
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+
+.auto-suggest .public-DraftEditor-content > div {
+    flex: 1;
+    overflow: hidden;
+}
+.request-url-editor .public-DraftEditor-content, .request-url-editor .public-DraftEditorPlaceholder-root {
+    font-size: 12px;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+ 
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+ 
+.request-editor__main .request-editor__main__button-group {
+    flex: 0 0 190px;
+}
+.request-editor__main__button-group {
+    display: flex;
+    flex-direction: row;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.request-editor-send-button .btn-group {
+    width: 100px;
+}
+.btn-group {
+    display: flex;
+    flex-direction: row;
+}
+.request-editor-send-button .btn:first-child {
+    width: 70px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 600;
+    border-color: #126dc8;
+}
+.btn-group-separated .btn:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.btn-group .btn:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.request-editor-send-button .btn {
+    background-color: #097bed;
+}
+.btn-group .btn {
+    border-radius: 0;
+}
+
+.request-editor-send-button .btn:first-child {
+    width: 70px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 600;
+    border-color: #126dc8;
+}
+.request-editor-send-button .btn:last-child {
+    width: 30px;
+    padding-left: 8px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.request-editor-send-button .btn {
+    background-color: #097bed;
+}
+
+.requester-contents .is-hidden {
+    display: none;
+}
+.dropdown-menu.is-hidden {
+    display: none;
+}
+.dropdown-menu.align-right {
+    right: 0;
+}
+.is-hidden {
+    display: none;
+}
+
+.request-editor-save-button {
+    margin-left: 10px;
+}
+
+.request-url-editor .auto-suggest {
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: #DCDCDC;
+}
+.auto-suggest {
+    position: relative;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    color: #505050;
+    flex: 1;
+    align-self: flex-start;
+}
+.request-url-editor .DraftEditor-root {
+    padding: 10px;
+}
+
+
+.auto-suggest .DraftEditor-root {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.DraftEditor-root {
+    position: relative;
+}
+
+
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+
+.auto-suggest .DraftEditor-editorContainer {
+    display: flex;
+    flex: 1;
+}
+
+
+.DraftEditor-editorContainer {
+    background-color: rgba(255,255,255,0);
+    border-left: .1px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+
+
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+
+.request-url-editor .public-DraftEditor-content, .request-url-editor .public-DraftEditorPlaceholder-root {
+    font-size: 12px;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+
+.auto-suggest .public-DraftEditor-content {
+    display: flex;
+    flex: 1;
+    width: 0;
+    align-items: center;
+}
+
+
+ 
+
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+    height: inherit;
+    text-align: initial;
+}
+
+.auto-suggest .public-DraftEditor-content > div {
+    flex: 1;
+    overflow: hidden;
+}
+
+
+
+.public-DraftStyleDefault-ltr {
+    direction: ltr;
+    text-align: left;
+}
+
+
+.public-DraftStyleDefault-block {
+    position: relative;
+
+}
+
+.auto-suggest .public-DraftStyleDefault-block {
+    text-overflow: ellipsis;
+
+    overflow: hidden;
+
+}

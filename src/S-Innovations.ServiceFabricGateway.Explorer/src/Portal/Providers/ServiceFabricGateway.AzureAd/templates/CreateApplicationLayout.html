@@ -1,0 +1,58 @@
+﻿<div class="create-application-layout">
+    <div class="content">
+        <div class="memberNameHolder">
+            <h2 id="az-ad-app-create">az ad app create</h2>
+            <div class="inlineEditButton">
+                <a href="https://github.com/Azure/azure-cli/blob/master/src/command_modules/azure-cli-role/azure/cli/command_modules/role/_help.py/#L0" data-bi-name="editMember" data-linktype="external"><span class="docon docon-edit-outline" aria-hidden="true"></span>Edit</a>
+            </div>
+        </div>
+        <p>Run the following commands to create an app registration</p>
+        <div class="codeHeader" data-bi-name="code-header">
+            <span class="language">Azure CLI</span>
+            <button class="action copy" data-bi-name="copy">
+                <span>Copy</span>
+            </button>
+            <button class="action tryIt" data-bi-name="code-header-try-it-azurecli" aria-haspopup="true" aria-controls="dockpanel">
+                <span>Try It</span>
+            </button>
+        </div>
+
+        <pre><code class="lang-azurecli" dir="ltr" data-interactive="azurecli"><span class="hljs-keyword">echo</span> &quot;<span data-bind="text:manifest"></span>&quot; > manifest.json
+<span class="hljs-keyword">az</span> <span class="hljs-keyword">ad</span> <span class="hljs-keyword">app</span> <span class="hljs-keyword">create</span><span class="hljs-parameter"> --display-name</span> <span data-bind="text:displayName"></span><span class="hljs-parameter"> --available-to-other-tenants false</span><span class="hljs-parameter"> --homepage</span> <span data-bind="text:homepage"></span> <span class="hljs-parameter"> --identifier-uris</span> <span data-bind="text:homepage"></span> <span class="hljs-parameter"> --reply-urls</span> <span data-bind="text:replyUrls"></span> <span class="hljs-parameter"> --required-resource-accesses</span> @manifest.json
+</code></pre>
+
+        <p>
+            Use the azure cloud shell in your browser and copy paste the output into the editor below.
+        </p>
+
+        <a style="cursor:pointer;    margin-top: 10px;" onclick='javascript:window.open("https://shell.azure.com", "_blank", "toolbar=no,scrollbars=yes,resizable=yes,menubar=no,location=no,status=no")'><image src="https://shell.azure.com/images/launchcloudshell.png" /></a>
+
+        <div class="codeHeader" data-bi-name="code-header">
+            <span class="language">Azure CLI</span>
+            <button class="action copy" data-bi-name="copy">
+                <span>Copy</span>
+            </button>
+            <button class="action tryIt" data-bi-name="code-header-try-it-azurecli" aria-haspopup="true" aria-controls="dockpanel">
+                <span>Try It</span>
+            </button>
+        </div>
+        <code id="aplication-paste-editor" style="height:200px;">
+
+        </code>
+    </div>
+
+    <div class="fxs-blade-actionBar" data-bind="with:actionBar">
+        <div class="fxs-bladeActionBar fxs-portal-border">
+            <div class="fxs-bladeActionBar-content fxc-base fxc-actionBarBase fxc-createActionBar fxc-createActionBar-secondaryLink-bottombanner">
+                <button class="fxc-actionbar-buttonwrapper" tabindex="-1" data-bind="click:onClick">
+                    <div class="fxc-actionBarBase-button fxc-createActionBar-okButton fxc-base fxc-simplebutton">
+                        <div class="fxs-button fxt-button fxs-portal-button-primary fxs-inner-dotted-border" role="button" data-bind="visible: visible, css: { 'fxs-button-disabled': disabled, 'fxs-portal-button-primary': primary, 'fxs-button-default': !ko.unwrap(primary), 'fxs-inner-dotted-border': !ko.unwrap(disabled) }, attr: { tabindex: tabIndex, 'aria-disabled': disabled, title: text }" tabindex="0" title="Create">
+
+                            <span class="fxs-button-text" data-bind="text: text">Create</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

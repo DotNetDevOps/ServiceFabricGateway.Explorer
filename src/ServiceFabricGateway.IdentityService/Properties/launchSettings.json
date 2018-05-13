@@ -1,0 +1,29 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:29840/",
+      "sslPort": 44327
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "GATEWAY_IDENTITY_SERVICE_SERVER_NAME": "localhost:44327",
+        "GATEWAY_IDENTITY_SERVICE_THUMBPRINT": "C03BB5A6410741CDD2927B4FF88C3E67215A393B",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "ServiceFabricGateway.IdentityService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:29841/"
+    }
+  }
+}

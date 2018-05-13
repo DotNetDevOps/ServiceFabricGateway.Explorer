@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27617.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceFabricGateway.Explorer", "src\S-Innovations.ServiceFabricGateway.Explorer\ServiceFabricGateway.Explorer.csproj", "{761BDE3E-A209-4018-B8DC-21EF800805D8}"
+EndProject
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceFabricGateway.ExplorerApplication", "apps\ServiceFabricGateway.ExplorerApplication\ServiceFabricGateway.ExplorerApplication.sfproj", "{5FF37024-B888-4DD8-8585-147D74EAEF1E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceFabricGateway.IdentityService", "src\ServiceFabricGateway.IdentityService\ServiceFabricGateway.IdentityService.csproj", "{365CF392-C884-46A8-AF37-085DA91D88E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{C6E312D1-E316-40E5-94CA-B293B71A8DFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Debug|x64.Build.0 = Debug|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{761BDE3E-A209-4018-B8DC-21EF800805D8}.Release|x64.Build.0 = Release|Any CPU
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Debug|x64.ActiveCfg = Debug|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Debug|x64.Build.0 = Debug|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Debug|x64.Deploy.0 = Debug|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Release|Any CPU.ActiveCfg = Release|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Release|x64.ActiveCfg = Release|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Release|x64.Build.0 = Release|x64
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E}.Release|x64.Deploy.0 = Release|x64
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Debug|x64.Build.0 = Debug|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{365CF392-C884-46A8-AF37-085DA91D88E4}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FF37024-B888-4DD8-8585-147D74EAEF1E} = {C6E312D1-E316-40E5-94CA-B293B71A8DFC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95A366F0-1BEA-4C7E-9CA7-EB08E33663AD}
+	EndGlobalSection
+EndGlobal

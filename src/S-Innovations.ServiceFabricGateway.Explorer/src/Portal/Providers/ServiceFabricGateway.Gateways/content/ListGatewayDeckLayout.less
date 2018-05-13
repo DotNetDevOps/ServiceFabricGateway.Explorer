@@ -1,0 +1,444 @@
+﻿
+.ext-hubs-browse-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .ext-hubs-browse-filters {
+        display: flex;
+        flex-wrap: wrap;
+
+        .ext-hubs-browse-resourcefilter {
+            flex: 1 1 80%;
+
+            .fxc-resourcefilter-subscriptionsummary {
+                margin-bottom: 10px;
+
+                .fxc-resourcefilter-summary-title {
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+
+    .ext-hubs-browse-section {
+        display: flex;
+
+        .ext-hubs-browse-count {
+            flex: 0 0 auto;
+            margin-top: 5px;
+            padding-right: 20px;
+        }
+    }
+
+    .ext-hubs-browse-grid-parent {
+        flex: 1 1 auto;
+        position: relative;
+
+
+        .ext-hubs-browse-grid {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+        }
+
+        .fxc-grid2.fxc-grid-scrolling.fxc-grid-verticalScroll {
+            height: 100%;
+            overflow-y: hidden;
+
+            div.fxc-grid-container {
+                height: 100%;
+                overflow-y: hidden;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-direction: column;
+                flex-direction: column;
+            }
+        }
+
+
+        .fxc-grid2.fxc-grid-scrolling, .fxc-grid2.fxc-grid-scrolling div.fxc-grid-container, .fxc-grid2.fxc-grid-scrolling div.fxc-grid-container div.fxc-grid-tableContainer, .fxc-grid2.fxc-grid-scrolling div.fxc-grid-container div.fxc-grid-tableContainer div.fxc-grid-tableScrollContainer {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+
+        .fxc-grid2 {
+            font-size: 12px;
+        }
+
+
+
+        .azc-br-muted {
+            border-color: #515151;
+        }
+
+        .fxc-grid2.fxc-grid-scrolling.fxc-grid-verticalScroll div.fxc-grid-container {
+            height: 100%;
+            overflow-y: hidden;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .fxc-grid2.fxc-grid-scrolling.fxc-grid-verticalScroll div.fxc-grid-container div.fxc-grid-tableContainer {
+            height: 100%;
+            overflow-y: hidden;
+            padding-top: 40px;
+            position: relative;
+            -webkit-flex: 1 1 auto;
+            flex: 1 1 auto;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .fxc-grid2.fxc-grid-scrolling.fxc-grid-verticalScroll div.fxc-grid-container div.fxc-grid-tableContainer div.fxc-grid-tableScrollContainer {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-flex: 1 1 auto;
+            flex: 1 1 auto;
+        }
+
+        .fxc-grid2.fxc-grid-scrolling.fxc-grid-verticalScroll div.fxc-grid-container div.fxc-grid-tableContainer div.fxc-grid-tableScrollContainer table.fxc-grid-tableHeader {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .fxc-grid2 table {
+            width: 100%;
+            border: 0;
+            background-color: transparent;
+            table-layout: fixed;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        .fxc-grid2.si-grid-selection .si-grid-selection-cell-col {
+            width: 26px;
+            max-width: 26px;
+        }
+
+        .fxc-grid2.si-grid-selection .si-grid-selection-cell-header {
+            padding-left: 7px;
+        }
+
+        .fxc-grid2 table th:first-child {
+            padding-left: 0;
+        }
+
+
+        .fxc-grid2 table thead tr th {
+            text-transform: uppercase;
+            text-align: left;
+            font-size: 10px;
+            padding: 0;
+            height: 40px;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .si-mode-dark .azc-text-label, .si-mode-dark .azc-text-sublabel {
+            color: #acacac;
+        }
+
+        .siportalfx-form-formelement .azc-dockedballoon.azc-dockedballoon-info {
+            height: 16px;
+            width: 16px;
+        }
+
+        .azc-dockedballoon.azc-dockedballoon-info {
+            display: inline-block;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .fxc-CheckBoxField .azc-formElementSubLabelContainer {
+            min-height: 17px;
+        }
+
+        .si-mode-dark .azc-checkBox.azc-control-disabled, .si-mode-dark .azc-input {
+            border-color: rgba(127,127,127,.7);
+        }
+
+        .si-mode-dark .azc-checkBox {
+            border-color: #7f7f7f;
+            background-color: #252525;
+        }
+
+
+        .si-mode-dark .azc-input {
+            color: #fff;
+        }
+
+
+        .azc-checkBox {
+            display: inline-block;
+            height: 17px;
+            vertical-align: top;
+            outline: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+
+        .si-mode-dark .azc-formControl {
+            background-color: #252525;
+        }
+
+        .azc-formControl, .si-portal-border, .siportalfx-docking-footer {
+            border-color: #666;
+        }
+
+
+        .azc-checkBox input {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            border-width: 0;
+            text-decoration: none;
+            height: 17px;
+        }
+
+        .azc-checkBox span.azc-validation-border {
+            display: inline-block;
+            height: 17px;
+            width: 17px !important;
+            vertical-align: top;
+            box-sizing: border-box;
+            border-width: 1px;
+            border-style: solid;
+            border-color: inherit;
+        }
+
+        .si-mode-dark .azc-fill-text {
+            fill: #fff;
+        }
+
+        .si-mode-dark .azc-checkBox .azc-checkBox-svg {
+            fill: #fd6e7c;
+        }
+
+        .azc-checkBox .azc-check-svg {
+            top: 3px;
+            left: 3px;
+        }
+
+        .si-mode-dark .azc-checkBox .azc-checkBox-svg {
+            fill: #fd6e7c;
+        }
+
+        .azc-checkBox .azc-indeterminate-svg {
+            top: 5px;
+            left: 5px;
+        }
+
+
+        .azc-checkBox .azc-checkBox-svg {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .azc-checkBox .azc-checkBox-svg {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .fxc-grid2.fxc-grid-sorting a.fxc-sortable {
+            cursor: pointer;
+            height: 40px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .fxc-grid2 table thead tr th .fxc-grid-header-wrapper > a {
+            padding: 1px 0 1px 10px;
+        }
+
+        .fxc-grid2 table thead tr th a {
+            line-height: 38px;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .fxc-grid2 table tbody tr td .fxc-dropdown, .fxc-grid2 table thead tr th .fxc-grid-header-wrapper > a .fxc-grid-headerlabel {
+            display: block;
+        }
+
+        .fxc-grid2.fxc-grid-sorting .fxc-grid-headerlabel {
+            display: block;
+            float: left;
+            max-width: ~"calc(100% - 35px)";
+        }
+
+
+        .fxc-grid2 table tbody tr td, .fxc-grid2 table thead tr th a span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fxc-grid2.fxc-grid-sorting .fxc-grid-sorting-sortImage {
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .si-portal-svg {
+            fill: #fff;
+        }
+
+
+        .fxc-grid2 table tbody tr td, .fxc-grid2 table thead tr th a span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fxc-grid2.fxc-grid-sorting .fxc-grid-sorting-sortImage {
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .si-mode-dark .si-portal-svg {
+            fill: #fff;
+        }
+
+
+        .fxc-grid2 table tbody tr td, .fxc-grid2 table thead tr th a span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fxc-grid2.fxc-grid-resizing .fxc-grid-resizableColumn-handle {
+            position: absolute;
+            right: -5px;
+            top: 0;
+            height: 100%;
+            width: 10px;
+            cursor: ew-resize;
+            z-index: 1;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+
+        .fxc-grid2.fxc-grid-resizing .fxc-grid-resizableColumn-handle .fxc-grid-resizableColumn-handle-line {
+            width: 1px;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .si-mode-dark .azc-bg-muted {
+            background-color: #666;
+        }
+
+        .fxc-grid2 table td:first-of-type, .fxc-grid2 table th:first-child a {
+            padding-left: 7px;
+        }
+
+        .si-mode-dark .azc-br-muted {
+            border-color: #515151;
+        }
+
+
+        .fxc-grid2 table tbody tr td {
+            padding: 1px 0 1px 10px;
+            height: 28px;
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+
+
+        .fxc-grid2 table tbody tr td, .fxc-grid2 table tbody:last-child tr:last-child td {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+
+
+        .fxc-grid2 table tbody tr td, .fxc-grid2 table thead tr th a span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fxc-grid2.si-grid-selection tbody td.fxc-grid-activatable {
+            color: #fd6e7c;
+        }
+
+        .fxc-grid2.si-grid-selection td.fxc-grid-activatable {
+            font-weight: 600;
+        }
+
+        .fxc-grid2.si-grid-selection table td.fxc-grid-activatable > span {
+            cursor: pointer;
+        }
+
+        .si-ellipsis {
+            overflow: hidden;
+        }
+
+
+        .fxc-preview, .si-ellipsis {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .si-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .siportalfx-gridcolumn-assetsvg-badge, .siportalfx-gridcolumn-assetsvg-icon img, .siportalfx-gridcolumn-assetsvg-icon svg {
+            height: 21px;
+            width: 21px;
+            vertical-align: middle;
+        }
+
+        .siportalfx-gridcolumn-assetsvg-text {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .fxc-grid2.si-grid-selection td.fxc-grid-activatable > span:hover {
+            text-decoration: underline;
+        }
+
+        .si-portal-hover:hover {
+            background-color: rgba(253, 110, 124, 0.08)
+        }
+    }
+
+
+    b, strong {
+        font-weight: 700;
+    }
+}
+
+.si-portal-main .si-deck-item .si-deck-item-content-container .si-deck-item-content:first-child:not(:last-child){
+    flex: 0 0 auto;
+
+}
+.si-portal-main .si-deck-item .si-deck-item-content-container .si-deck-item-content {
+    flex: 0 0 auto;
+}
+
+.si-portal-main {
+    .si-deck-item .si-deck-item-content-container.stacked{
+        overflow-y:auto;
+    }
+}

@@ -1,0 +1,31 @@
+﻿@page
+@*<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="//secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
+    <script>
+        var context = new AuthenticationContext({
+            tenant: "802626c6-0f5c-4293-a8f5-198ecd481fe3",
+            clientId: "e620857d-78f0-4f13-a478-bab918c1be9c"
+        });
+
+        context.handleWindowCallback();
+    </script>
+</body>
+</html>*@ 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/oidc-client/1.4.1/oidc-client.min.js"></script>
+    <script>
+        var mgr = new Oidc.UserManager();
+        mgr.signinSilentCallback();
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿
+<div>
+    <div class="detail-pane essen-pane ng-scope">
+        <div class="table-responsive">
+            <table class="essen-table">
+                <tbody>
+                    <tr>
+
+                        <th>ServerName</th>
+                        <th>Reverse Proxy Location</th>
+
+                    </tr>
+                    <tr>
+                        <td data-bind="text:serverName"></td>
+                        <td data-bind="text:reverseProxyLocation"></td>
+
+
+                    </tr>
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Service Version</th>
+                    </tr>
+                    <tr>
+                        <td data-bind="text:serviceName"></td>
+                        <td data-bind="text:serviceVersion"></td>
+                    </tr>
+                    <tr>
+                        <th>Last updated</th>
+                        <th>Proxy Health State</th>
+                    </tr>
+                    <tr>
+                        <td data-bind="text:lastUpdated"></td>
+                        <td>
+                            <div class="badge-container ng-isolate-scope" title="OK" badge-class="clusterHealth.healthState.badgeClass" text="clusterHealth.healthState.text">
+                                <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" enable-background="new 0 0 16 16"><path fill="#fff" d="M16 8c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" /><path fill="#7FBA00" d="M8 1c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm-1.4 10.864l-2.807-2.806 1.414-1.415 1.393 1.393 4.193-4.193 1.414 1.414-5.607 5.607z" /></svg>
+                                <span class="ng-binding">OK</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detail-pane ng-scope"  style="">
+        <div class="dashboard-container container-fluid">
+            <div class="dashboard-wrapper ng-isolate-scope" data="nodesDashboard">
+                <div class="dashboard dashboard-large has-view-path">
+                    <svg class="dashboard-donut-chart" width="206" height="206">
+                        <g transform="translate(103,103)"><g transform="translate(-103, -6)"><text class="dashboard-number" data-bind="text:nodeCount" transform="translate(6, 18)" style="font-size: 72px;"></text><text transform="translate(8, 40)" class="dashboard-title">NODES</text></g><path display="none" d="M-70.71067811865474,-70.71067811865476A100,100 0 1,1 -70.71067811865474,70.71067811865476L-63.63961030678927,63.63961030678928A90,90 0 1,0 -63.63961030678927,-63.63961030678928Z" class="dashboard-arc-bg"></path><path class="dashboard-arc badge-error" d="M-70.71067811865474,-70.71067811865476A100,100 0 0,1 -70.71067811865474,-70.71067811865476L-63.63961030678927,-63.63961030678928A90,90 0 0,0 -63.63961030678927,-63.63961030678928Z"><title>Error: 0.0%</title></path><path class="dashboard-arc badge-warning" d="M-70.71067811865474,-70.71067811865476A100,100 0 0,1 -70.71067811865474,-70.71067811865476L-63.63961030678927,-63.63961030678928A90,90 0 0,0 -63.63961030678927,-63.63961030678928Z"><title>Warning: 0.0%</title></path><path class="dashboard-arc badge-ok" d="M-69.26936046222998,-72.12319807907612A100,100 0 1,1 -69.26936046222998,72.12319807907612L-62.196692396177454,65.05053001302358A90,90 0 1,0 -62.196692396177454,-65.05053001302358Z"><title>Healthy: 100.0%</title></path></g></svg>
+
+                    <div class="dashboard-datapoints ng-scope" style="">
+
+                        <div class="dashboard-datapoint ng-scope">
+                            <div class="dashboard-datapoint-leftbar badge-error"></div>
+                            <div class="dashboard-datapoint-title ng-binding">ERROR</div>
+                            <div class="dashboard-datapoint-number ng-binding">0</div>
+                        </div>
+                        <div class="dashboard-datapoint ng-scope">
+                            <div class="dashboard-datapoint-leftbar badge-warning"></div>
+                            <div class="dashboard-datapoint-title ng-binding">WARNING</div>
+                            <div class="dashboard-datapoint-number ng-binding">0</div>
+                        </div>
+                        <div class="dashboard-datapoint ng-scope">
+                            <div class="dashboard-datapoint-leftbar badge-ok"></div>
+                            <div class="dashboard-datapoint-title">HEALTHY</div>
+                            <div class="dashboard-datapoint-number" data-bind="text:nodeCount">5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

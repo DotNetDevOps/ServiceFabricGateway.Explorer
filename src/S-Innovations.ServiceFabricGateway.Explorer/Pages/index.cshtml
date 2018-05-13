@@ -1,0 +1,37 @@
+@page
+@inject IOptions<EndpointsOptions> EndpointsOptions;
+@inject IOptions<ApplicationInsights> ApplicationInsights;
+@inject IOptions<OidcClientConfiguration> OidcClientConfiguration;
+
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <script>document.documentElement.className = 'js';</script>
+
+    <script src="libs/requirejs/require.js" data-main="main"></script>
+
+    <script>
+
+
+
+
+        require.config({
+
+            paths: {
+                "main": "src/main",
+            },
+            config: {
+                "main": { "rootModule": "ServiceFabricGateway" },
+                "ServiceFabricGateway/endpoints": @Json.Serialize(EndpointsOptions.Value),
+                "ServiceFabricGateway/index": @Json.Serialize(new { oidc = OidcClientConfiguration.Value, applicationInsights = ApplicationInsights.Value })
+            }
+
+        });
+
+
+    </script>
+</head>
+<body class="loading si-theme-pink si-mode-light">
+    <!-- koLayout : $data-->
+</body>
+</html>

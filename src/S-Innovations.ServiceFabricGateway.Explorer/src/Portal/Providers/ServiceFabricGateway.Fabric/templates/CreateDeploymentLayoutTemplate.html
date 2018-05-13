@@ -1,0 +1,18 @@
+﻿
+<div class="create-deployment-layout">
+    <div class="editor" data-bind="attr:{id:id}" style=""></div>
+    <div class="fxs-blade-actionBar" data-bind="with:actionBar">
+        <div class="fxs-bladeActionBar fxs-portal-border">
+            <div class="fxs-bladeActionBar-content fxc-base fxc-actionBarBase fxc-createActionBar fxc-createActionBar-secondaryLink-bottombanner">
+                <button class="fxc-actionbar-buttonwrapper" tabindex="-1" data-bind="click:onClick">
+                    <div class="fxc-actionBarBase-button fxc-createActionBar-okButton fxc-base fxc-simplebutton"  >
+                        <div class="fxs-button fxt-button fxs-portal-button-primary fxs-inner-dotted-border" role="button" data-bind="visible: visible, css: { 'fxs-button-disabled': disabled, 'fxs-portal-button-primary': primary, 'fxs-button-default': !ko.unwrap(primary), 'fxs-inner-dotted-border': !ko.unwrap(disabled) }, attr: { tabindex: tabIndex, 'aria-disabled': disabled, title: text }" tabindex="0" title="Create">
+                         
+                            <span class="fxs-button-text" data-bind="text: text">Create</span> 
+                        </div>
+                    </div>
+                </button>               
+            </div>            
+        </div>
+    </div>
+</div>
