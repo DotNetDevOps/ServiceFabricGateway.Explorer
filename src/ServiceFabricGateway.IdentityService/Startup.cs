@@ -379,7 +379,7 @@ namespace ServiceFabricGateway.IdentityService
             app.UseIdentityServer();
 
             app.UseCors("IdentityServicePolicy");
-            app.UseMvc();
+            app.UseMvc();//.SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
         }
     }
 }
