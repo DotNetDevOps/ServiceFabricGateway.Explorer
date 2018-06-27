@@ -24,6 +24,7 @@ namespace ServiceFabricGateway.Explorer.Controllers
     {
         public string ServiceTypeName { get; set; }
         public string ServiceName { get;  set; }
+        public byte[] InitializationData { get; set; }
     }
     public class DeploymentModel
     {
@@ -359,6 +360,7 @@ namespace ServiceFabricGateway.Explorer.Controllers
                         ServiceTypeName = serviceDeployment.ServiceTypeName,
                         ApplicationName = applicationName,
                         ServiceName = serviceName,
+                        InitializationData = serviceDeployment.InitializationData,
                         PartitionSchemeDescription = new SingletonPartitionSchemeDescription() { }
                     });
                     logger.LogInformation("Service created for {ServiceName}", serviceName);
