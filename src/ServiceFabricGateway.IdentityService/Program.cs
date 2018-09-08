@@ -140,7 +140,7 @@ namespace ServiceFabricGateway.IdentityService
 
         private static void RunInServiceFabric(IUnityContainer container)
         {
-            container.WithServiceProxy<IApplicationStorageService>("fabric:/S-Innovations.ServiceFabric.GatewayApplication/ApplicationStorageService", listenerName: "V2Listener");
+            container.WithServiceProxy<IApplicationStorageService>("fabric:/S-Innovations.ServiceFabric.GatewayApplication/ApplicationStorageService", listenerName: "V2_1Listener");
 
 
 
