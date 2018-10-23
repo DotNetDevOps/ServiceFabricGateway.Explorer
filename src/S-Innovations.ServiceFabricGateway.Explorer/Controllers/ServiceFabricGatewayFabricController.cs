@@ -388,7 +388,10 @@ namespace ServiceFabricGateway.Explorer.Controllers
             var env = new EnvelopedCms(content);
             env.Encrypt(new CmsRecipient(cert));
 
-            return Ok(new { value = Convert.ToBase64String(env.Encode())});
+            return Ok(new {
+                value = Convert.ToBase64String(env.Encode()),
+                thumbprint= thumbprint
+            });
         }
     }
 
