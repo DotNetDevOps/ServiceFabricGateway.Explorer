@@ -27,6 +27,7 @@ using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore.Configuration
 using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore.Extensions;
 using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore.Model;
 using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore.Services;
+using SInnovations.ServiceFabric.ResourceProvider;
 using SInnovations.ServiceFabric.Storage.Services;
 
 namespace ServiceFabricGateway.IdentityService
@@ -205,7 +206,8 @@ namespace ServiceFabricGateway.IdentityService
             host.ConfigureServices((context, services) =>
             {
                 services.AddScoped(sp => ServiceProxy.Create<IApplicationStorageService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/ApplicationStorageService"), listenerName: "V2_1Listener"));
-                 
+                services.AddScoped(sp => ServiceProxy.Create<IKeyVaultService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/KeyVaultService"), listenerName: "V2_1Listener"));
+
             });
 
 

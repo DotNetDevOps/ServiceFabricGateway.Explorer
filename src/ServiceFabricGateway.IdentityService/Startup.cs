@@ -19,12 +19,14 @@ using Microsoft.WindowsAzure.Storage;
 using Newtonsoft.Json.Linq;
 using ServiceFabricGateway.IdentityService.Configuration;
 using ServiceFabricGateway.IdentityService.Controllers;
+using SInnovations.ServiceFabric.ResourceProvider;
 using SInnovations.ServiceFabric.Storage.Extensions;
 using SInnovations.ServiceFabric.Storage.Services;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ServiceFabricGateway.IdentityService
@@ -183,13 +185,14 @@ namespace ServiceFabricGateway.IdentityService
         private readonly ILifetimeScope _container;
         private readonly IHostingEnvironment env;
         private readonly IdentityServiceOptions options;
+        private readonly ILogger _logger;
         public Startup(ILifetimeScope container, IHostingEnvironment hostingEnvironment)
         {
             _container = container;
             this.env = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
             this.options = _container.Resolve<IOptions<IdentityServiceOptions>>().Value??throw new ArgumentNullException(nameof(IOptions<IdentityServiceOptions>));
-
-            _container.Resolve<ILoggerFactory>().CreateLogger<Startup>().LogInformation("{@IdentityServiceOptions}", options);
+            this._logger = _container.Resolve<ILoggerFactory>().CreateLogger<Startup>();
+            _logger.LogInformation("{@IdentityServiceOptions}", options);
 
         }
         
@@ -202,12 +205,17 @@ namespace ServiceFabricGateway.IdentityService
                 o.AddPolicy("IdentityServicePolicy", builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials().SetPreflightMaxAge(TimeSpan.FromHours(1)));
             });
 
-         
 
-            var cert = X509.LocalMachine.My.Thumbprint.Find(options.Thumbprint, validOnly: false).FirstOrDefault();
+
+            var secrets = _container.Resolve<IKeyVaultService>().GetSecretsAsync("test").GetAwaiter().GetResult();
+            var certs = secrets.Select(s => new X509Certificate2(Convert.FromBase64String(s), (string)null, X509KeyStorageFlags.MachineKeySet)).ToArray();
+            _logger.LogInformation("Found {count} certificates",certs.Length);
+            //  X509Certificate2 cert = X509.LocalMachine.My.Thumbprint.Find(options.Thumbprint, validOnly: false).FirstOrDefault();
+
             if (!env.IsDevelopment())
             {
-                services.AddApplicationStorageDataProtection(_container.Resolve<IApplicationStorageService>(), cert, $"{options.Thumbprint.ToLower()}-identity");
+                
+                services.AddApplicationStorageDataProtection(_container.Resolve<IApplicationStorageService>(), certs.First(), $"{options.Thumbprint.ToLower()}-identity", certs.Skip(1).ToArray());
 
             }
             services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureCookieDomainFromEnvironment>();
@@ -218,7 +226,7 @@ namespace ServiceFabricGateway.IdentityService
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
             .AddJsonOptions((options) =>
             {
-                options.SerializerSettings.Converters.Add(new ClaimConverter());
+                options.SerializerSettings.Converters.Add(new IdentityServer4.Stores.Serialization.ClaimConverter());
             });
 
             var idsrvBuilder = services.AddIdentityServer(options =>
@@ -232,7 +240,7 @@ namespace ServiceFabricGateway.IdentityService
 
 
             })
-            .AddSigningCredential(cert)
+            .AddSigningCredential(certs.First())
             .AddInMemoryClients(new[] {  new Client {
                     ClientId = "ServiceFabricGateway.Explorer",
                     ClientName = "Service Fabric Gateway Explorer",
