@@ -37,7 +37,7 @@
     "si-splitlayout": "1.0.2",
     "si-portal": "1.0.8",
     "strip-json-comments": "2.0.1",
-    "typescript": "3.1.6",
+    "typescript": "3.2.4",
     "knockout": "3.4.2",
     "monaco-editor": "0.12.0"
   },
