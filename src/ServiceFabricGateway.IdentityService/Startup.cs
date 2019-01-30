@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Autofac;
 using IdentityModel;
 using IdentityServer4;
-using IdentityServer4.Extensions;
 using IdentityServer4.Models;
-using IdentityServer4.ResponseHandling;
 using IdentityServer4.Services;
 using IdentityServer4.Stores.Serialization;
 using IdentityServer4.Validation;
@@ -18,7 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -29,7 +21,11 @@ using ServiceFabricGateway.IdentityService.Configuration;
 using ServiceFabricGateway.IdentityService.Controllers;
 using SInnovations.ServiceFabric.Storage.Extensions;
 using SInnovations.ServiceFabric.Storage.Services;
-using Unity;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ServiceFabricGateway.IdentityService
 {
@@ -184,24 +180,19 @@ namespace ServiceFabricGateway.IdentityService
 
     public class Startup
     {
-        private readonly IUnityContainer _container;
+        private readonly ILifetimeScope _container;
         private readonly IHostingEnvironment env;
         private readonly IdentityServiceOptions options;
-        public Startup(
-           IUnityContainer container, IHostingEnvironment env)
+        public Startup(ILifetimeScope container, IHostingEnvironment hostingEnvironment)
         {
             _container = container;
-            this.env = env ?? throw new ArgumentNullException(nameof(env));
+            this.env = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
             this.options = _container.Resolve<IOptions<IdentityServiceOptions>>().Value??throw new ArgumentNullException(nameof(IOptions<IdentityServiceOptions>));
 
             _container.Resolve<ILoggerFactory>().CreateLogger<Startup>().LogInformation("{@IdentityServiceOptions}", options);
 
         }
-        public void ConfigureContainer(IUnityContainer container)
-        {
-            container.RegisterInstance("This string is displayed if container configured correctly",
-                                       "This string is displayed if container configured correctly");
-        }
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -216,14 +207,15 @@ namespace ServiceFabricGateway.IdentityService
             var cert = X509.LocalMachine.My.Thumbprint.Find(options.Thumbprint, validOnly: false).FirstOrDefault();
             if (!env.IsDevelopment())
             {
-                services.AddApplicationStorageDataProtection(_container, cert, $"{options.Thumbprint.ToLower()}-identity");
+                services.AddApplicationStorageDataProtection(_container.Resolve<IApplicationStorageService>(), cert, $"{options.Thumbprint.ToLower()}-identity");
+
             }
             services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureCookieDomainFromEnvironment>();
             services.AddTransient<IEventSink, DefaultEventSink>();
        //     services.AddScoped<IAuthorizeInteractionResponseGenerator, MyAuthorizeInteractionResponseGenerator>();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Latest)
             .AddJsonOptions((options) =>
             {
                 options.SerializerSettings.Converters.Add(new ClaimConverter());

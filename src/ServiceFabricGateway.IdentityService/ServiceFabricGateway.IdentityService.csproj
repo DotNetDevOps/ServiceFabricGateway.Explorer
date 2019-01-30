@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>9db41619-b746-48ae-9153-dcb2448afe9f</UserSecretsId>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +14,8 @@
     <PackageReference Include="IdentityServer4" Version="2.3.2" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="S-Innovations.ServiceFabric.RegistrationMiddleware.AspNetCore" Version="2.1.2-ci-20181207-02-ci" />
-    <PackageReference Include="S-Innovations.ServiceFabric.Storage" Version="2.1.2-ci-20181207-02-ci" />
+    <PackageReference Include="S-Innovations.ServiceFabric.RegistrationMiddleware.AspNetCore" Version="2.1.2-ci-20190108-01-ci" />
+    <PackageReference Include="S-Innovations.ServiceFabric.Storage" Version="2.1.2-ci-20190108-01-ci" />
     <PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
   </ItemGroup>
 
