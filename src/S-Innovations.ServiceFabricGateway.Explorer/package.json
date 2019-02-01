@@ -39,7 +39,7 @@
     "si-splitlayout": "1.0.2",
     "strip-json-comments": "2.0.1",
     "typescript": "3.2.4",
-    "si-portal": "1.0.10"
+    "si-portal": "1.0.11"
   },
   "scripts": {
     "tsc": "node_modules/.bin/tsc"
