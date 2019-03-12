@@ -105,7 +105,7 @@ namespace ServiceFabricGateway.Explorer
 
 
 
-            var host = new FabricHostBuilder()
+            var host = new FabricHostBuilder(args)
               //Add fabric configuration provider
               .ConfigureAppConfiguration((context, configurationBuilder) =>
               {
@@ -122,6 +122,14 @@ namespace ServiceFabricGateway.Explorer
                       configurationBuilder.AddServiceFabricConfig("Config");
                   }
 
+              }).ConfigureServices((context, services) =>
+              {
+                  services.WithKestrelHosting<Startup>("S-Innovations.ServiceFabricGateway.ExplorerType", ConfigureGateways);
+
+                  if (!args.Contains("--serviceFabric"))
+                  {
+                      ConfigureIIS(services);
+                  }
               })
                 .Configure<EndpointsOptions>("Endpoints")
                 .Configure<OidcClientConfiguration>("OidcClientConfiguration")
@@ -132,26 +140,17 @@ namespace ServiceFabricGateway.Explorer
                              logConfiguration.MinimumLevel.Debug()
                              .Enrich.FromLogContext()
                               .WriteTo.LiterateConsole(outputTemplate: LiterateLogTemplate))
-                              
+
                 .ConfigureApplicationInsights();
 
-
-            if (args.Contains("--serviceFabric"))
-            {
-
-                await RunFabric(host);
-            }
-            else
-            {
-                await RunIis(host);
-            }
+            await host.RunConsoleAsync();
 
 
 
 
         }
 
-        private static async Task RunIis(IHostBuilder container)
+        private static IServiceCollection ConfigureIIS(IServiceCollection services)
         {
             X509Credentials cert = new X509Credentials
             {
@@ -170,74 +169,12 @@ namespace ServiceFabricGateway.Explorer
                     ClientFriendlyName = "S-Innovations VSTS Deployment Client"
                 }, "sf-gateway-test.westeurope.cloudapp.azure.com:19000");
 
-            container.ConfigureServices((context, services) =>
-            {
-                services.AddSingleton(fabricClient);
-            });
 
-            var app = container.Build();
+            services.AddSingleton(fabricClient);
 
-            Log.Logger = new LoggerConfiguration()
-                 .MinimumLevel.Debug()
-                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                 .Enrich.FromLogContext()
-                 .WriteTo.Console()
-                 .CreateLogger();
-
-            var host = new WebHostBuilder()
-                 .UseKestrel()
-                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseWebRoot("artifacts")
-                 .ConfigureLogging(logbuilder =>
-                 {
-
-                     logbuilder.AddSerilog();
-                 })
-                 .UseIISIntegration()
-                 .UseStartup<Startup>()
-                 .UseApplicationInsights()
-                   .ConfigureServices((ctx, collection) => { collection.AddSingleton(container); })
-                 .Build();
-
-            await app.StartAsync();
-
-            await host.RunAsync();
-
-            await app.StopAsync();
-
-
+            return services;
         }
 
-        private static async Task RunFabric(IHostBuilder host)
-        {
-
-            //string clientCertThumb = "71DE04467C9ED0544D021098BCD44C71E183414E";
-            //string serverCertThumb = "A8136758F4AB8962AF2BF3F27921BE1DF67F4326";
-            //string CommonName = "www.clustername.westus.azure.com";
-            //string connection = "sf-gateway-test.westeurope.cloudapp.azure.com:19000";
-
-            //var xc = GetCredentials(clientCertThumb, serverCertThumb, CommonName);
-            //var fc = new FabricClient(xc, connection);
-
-            //try
-            //{
-            //    var ret = fc.ClusterManager.GetClusterManifestAsync().Result;
-            //    Console.WriteLine(ret.ToString());
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine("Connect failed: {0}", e.Message);
-            //}
-
-
-
-
-
-
-            host.WithKestrelHosting<Startup>("S-Innovations.ServiceFabricGateway.ExplorerType", ConfigureGateways);
-
-            await host.Build().RunAsync();
-        }
 
         private static KestrelHostingServiceOptions ConfigureGateways(IComponentContext container)
         {

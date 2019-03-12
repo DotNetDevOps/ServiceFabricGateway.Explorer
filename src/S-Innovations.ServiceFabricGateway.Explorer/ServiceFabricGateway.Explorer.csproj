@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="S-Innovations.ServiceFabric.RegistrationMiddleware.AspNetCore" Version="2.1.2-ci-20190130-01-ci" />
+    <PackageReference Include="S-Innovations.ServiceFabric.RegistrationMiddleware.AspNetCore" Version="2.2.0-ci-20190312-01-ci" />
     <PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.5.1" />
   </ItemGroup>

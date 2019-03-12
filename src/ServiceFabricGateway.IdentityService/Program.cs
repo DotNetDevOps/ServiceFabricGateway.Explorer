@@ -21,6 +21,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Serilog;
 using Serilog.Events;
+using SInnovations.ServiceFabric.Gateway.Common.Services;
 using SInnovations.ServiceFabric.Gateway.Model;
 using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore;
 using SInnovations.ServiceFabric.RegistrationMiddleware.AspNetCore.Configuration;
@@ -89,7 +90,7 @@ namespace ServiceFabricGateway.IdentityService
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 
-            var host = new FabricHostBuilder()
+            var host = new FabricHostBuilder(args)
              //Add fabric configuration provider
              .ConfigureAppConfiguration((context, configurationBuilder) =>
              {
@@ -115,8 +116,28 @@ namespace ServiceFabricGateway.IdentityService
              //Setup services that exists on root, shared in all services
              .ConfigureServices((context, services) =>
              {
+ 
+                     services.AddScoped(sp => ServiceProxy.Create<IApplicationStorageService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/ApplicationStorageService"), listenerName: "V2_1Listener"));
+                     services.AddScoped(sp => ServiceProxy.Create<IKeyVaultService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/KeyVaultService"), listenerName: "V2_1Listener"));
 
 
+
+                 services.WithKestrelHosting<Startup>("ServiceFabricGateway.IdentityServiceType", (c) =>
+                       new KestrelHostingServiceOptions
+                       {
+                           GatewayOptions = new GatewayOptions
+                           {
+                               Key = "ServiceFabricGateway.IdentityServiceType",
+                               ServerName = c.Resolve<IOptions<IdentityServiceOptions>>().Value.ServerName,
+                               ReverseProxyLocation = "/identity/",
+                               Ssl = new SslOptions
+                               {
+                                   Enabled = true,
+                                   SignerEmail = "info@earthml.com",
+                                   UseHttp01Challenge = c.Resolve<Microsoft.Extensions.Hosting.IHostingEnvironment>().IsProduction(),
+                               }
+                           }
+                       });
 
                  services.AddSingleton<CloudStorageAccount>((c) =>
                  {
@@ -145,17 +166,9 @@ namespace ServiceFabricGateway.IdentityService
 
                 .ConfigureApplicationInsights();
 
-            if (args.Contains("--serviceFabric"))
-            {
+            await host.RunConsoleAsync();
 
-                await RunFabric(host);
-            }
-            else
-            {
-                await RunIis(host);
-            }
-
-
+          
            
 
         }
@@ -199,37 +212,7 @@ namespace ServiceFabricGateway.IdentityService
             await app.StopAsync();
         }
 
-        private static async Task RunFabric(IHostBuilder host)
-        {
-           
-
-            host.ConfigureServices((context, services) =>
-            {
-                services.AddScoped(sp => ServiceProxy.Create<IApplicationStorageService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/ApplicationStorageService"), listenerName: "V2_1Listener"));
-                services.AddScoped(sp => ServiceProxy.Create<IKeyVaultService>(new Uri("fabric:/S-Innovations.ServiceFabric.GatewayApplication/KeyVaultService"), listenerName: "V2_1Listener"));
-
-            });
-
-
-            host.WithKestrelHosting<Startup>("ServiceFabricGateway.IdentityServiceType", (c) =>
-                  new KestrelHostingServiceOptions
-                  {
-                      GatewayOptions = new GatewayOptions
-                      {
-                          Key = "ServiceFabricGateway.IdentityServiceType",
-                          ServerName = c.Resolve<IOptions<IdentityServiceOptions>>().Value.ServerName,
-                          ReverseProxyLocation = "/identity/",
-                          Ssl = new SslOptions
-                          {
-                              Enabled = true,
-                              SignerEmail = "info@earthml.com",
-                              UseHttp01Challenge = c.Resolve<Microsoft.Extensions.Hosting.IHostingEnvironment>().IsProduction(),
-                          }
-                      }
-                  });
-
-            await host.Build().RunAsync();
-        }
+        
 
 
     }

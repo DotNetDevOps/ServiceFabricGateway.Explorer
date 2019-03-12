@@ -19,6 +19,7 @@ using Microsoft.WindowsAzure.Storage;
 using Newtonsoft.Json.Linq;
 using ServiceFabricGateway.IdentityService.Configuration;
 using ServiceFabricGateway.IdentityService.Controllers;
+using SInnovations.ServiceFabric.Gateway.Common.Services;
 using SInnovations.ServiceFabric.ResourceProvider;
 using SInnovations.ServiceFabric.Storage.Extensions;
 using SInnovations.ServiceFabric.Storage.Services;
