@@ -16,4 +16,7 @@
   <Section Name="ReverseProxySettings">
     <Parameter Name="ServerName"   Value="" MustOverride="true" />
   </Section>
+  <Section Name="Infrastructure">
+    <Parameter Name="SecretsCertificate_Thumbprint"   Value="" MustOverride="true" />
+  </Section>
 </Settings>

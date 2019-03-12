@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ using System.Fabric.Description;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,7 @@ namespace ServiceFabricGateway.Explorer.Controllers
     {
         public string ServiceTypeName { get; set; }
         public string ServiceName { get;  set; }
+        public byte[] InitializationData { get; set; }
     }
     public class DeploymentModel
     {
@@ -201,6 +204,8 @@ namespace ServiceFabricGateway.Explorer.Controllers
 
             return JSON(applications);
         }
+
+      
         [HttpDelete("providers/ServiceFabricGateway.Fabric/applications/{applicationName}")]
         public async Task<IActionResult> DeleteApplication([FromServices] FabricClient fabric, string applicationName)
         {
@@ -359,6 +364,7 @@ namespace ServiceFabricGateway.Explorer.Controllers
                         ServiceTypeName = serviceDeployment.ServiceTypeName,
                         ApplicationName = applicationName,
                         ServiceName = serviceName,
+                        InitializationData = serviceDeployment.InitializationData,
                         PartitionSchemeDescription = new SingletonPartitionSchemeDescription() { }
                     });
                     logger.LogInformation("Service created for {ServiceName}", serviceName);
@@ -366,5 +372,32 @@ namespace ServiceFabricGateway.Explorer.Controllers
             }
             logger.LogInformation("Completed to create services {@deploymentModel}", deploymentModel);
         }
+
+
+        [HttpPost("providers/ServiceFabricGateway.Fabric/security/encryptParameter")]
+        public async Task<IActionResult> EncryptParameter([FromBody] EncryptParameterModel model, [FromServices] ICodePackageActivationContext codePackageActivationContext )
+        {
+            var encoded = Encoding.Unicode.GetBytes(model.Value);
+
+            var thumbprint = codePackageActivationContext.GetConfigurationPackageObject("Config").Settings.Sections["Infrastructure"].Parameters["SecretsCertificate_Thumbprint"].Value;
+
+
+            var cert = X509.LocalMachine.My.Thumbprint.Find(thumbprint, validOnly: false).FirstOrDefault();
+
+            var content = new ContentInfo(encoded);
+            var env = new EnvelopedCms(content);
+            env.Encrypt(new CmsRecipient(cert));
+
+            return Ok(new {
+                value = Convert.ToBase64String(env.Encode()),
+                thumbprint= thumbprint
+            });
+        }
+    }
+
+   
+    public class EncryptParameterModel
+    {
+        public string Value { get; set; }
     }
 }

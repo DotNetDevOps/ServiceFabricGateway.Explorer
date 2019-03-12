@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceFabricGateway.ExplorerApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceFabricGateway.ExplorerApplicationType" ApplicationTypeVersion="2.1.2" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
     <Parameter Name="S-Innovations.ServiceFabricGateway.Explorer_InstanceCount" DefaultValue="-1" />
     <Parameter Name="ASPNETCORE_ENVIRONMENT" DefaultValue="Staging" />
@@ -28,12 +28,18 @@
           <Section Name="ApplicationInsights">
             <Parameter Name="InstrumentationKey" Value="[InstrumentationKey]" />
           </Section>
+          <Section Name="Infrastructure">
+            <Parameter Name="SecretsCertificate_Thumbprint" Value="[IDENTITY_SERVICE_THUMBPRINT]" />
+          </Section>
         </Settings>
       </ConfigOverride>
     </ConfigOverrides>
     <EnvironmentOverrides CodePackageRef="Code">
       <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[ASPNETCORE_ENVIRONMENT]" />
     </EnvironmentOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="ExplorerService" EntryPointType="All" />
+    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ServiceFabricGateway.IdentityServicePkg" ServiceManifestVersion="1.0.0" />
@@ -67,11 +73,13 @@
   <Principals>
     <Users>
       <User Name="IdentityService" AccountType="NetworkService" />
+      <User Name="ExplorerService" AccountType="NetworkService" />
     </Users>
   </Principals>
   <Policies>
     <SecurityAccessPolicies>
       <SecurityAccessPolicy ResourceRef="IdentityCert" PrincipalRef="IdentityService" ResourceType="Certificate" />
+      <SecurityAccessPolicy ResourceRef="IdentityCert" PrincipalRef="ExplorerService" ResourceType="Certificate" />
     </SecurityAccessPolicies>
   </Policies>
   <Certificates>
